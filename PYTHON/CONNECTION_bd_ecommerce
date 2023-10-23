@@ -1,0 +1,22 @@
+import mysql.connector as MC
+import random 
+try:
+    conn = MC.connect(host='localhost', database='ecommerce', user='root', password='')
+
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM villes LIMIT 20")
+
+    # Récupérer et afficher les 20 premiers lignes de la tables villes  
+    for row in cursor.fetchall():
+        print(row)
+
+except MC.Error as err:
+    print("[ERREUR]", err)
+
+finally:
+    if 'conn' in locals() and conn.is_connected():
+        cursor.close()
+        conn.close()
+        
+
+

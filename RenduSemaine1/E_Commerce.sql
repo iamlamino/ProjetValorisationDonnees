@@ -1,54 +1,50 @@
-CREATE DATABASE E_commerce;
-USE E_ommerce;
-CREATE TABLE CLIENTS(
-   idClient INT,
+CREATE DATABASE ecommerce;
+USE ecommerce;
+
+CREATE TABLE Clients(
+   idClient VARCHAR(70),
    prenom VARCHAR(50),
    nom VARCHAR(50),
    email VARCHAR(50),
-   telephone INT,
+   telephone VARCHAR(50),
    dateNaissance DATE,
-   mdp INT,
-   ville VARCHAR(50),
-   pays VARCHAR(50),
+   mdp VARCHAR(50),
+   ville_ VARCHAR(50) NOT NULL,
+   pays VARCHAR(50) NOT NULL,
    PRIMARY KEY(idClient)
 );
 
 CREATE TABLE Commandes(
-   idCommande INT,
+   idCommande VARCHAR(50),
    dateCommande DATE,
    statut VARCHAR(60),
-   idClient INT NOT NULL,
+   idClient VARCHAR(70) NOT NULL,
    PRIMARY KEY(idCommande),
-   FOREIGN KEY(idClient) REFERENCES CLIENTS(idClient)
-);
-
-CREATE TABLE CategorieMere(
-   idCaterieMere INT,
-   PRIMARY KEY(idCaterieMere)
+   FOREIGN KEY(idClient) REFERENCES Clients(idClient)
 );
 
 CREATE TABLE Categories(
    idCategories INT,
-   nomCategorie VARCHAR(50),
-   idCaterieMere INT NOT NULL,
+   nomCategorie VARCHAR(50) NOT NULL,
+   idCategorieMere INT NOT NULL,
    PRIMARY KEY(idCategories),
-   FOREIGN KEY(idCaterieMere) REFERENCES CategorieMere(idCaterieMere)
+   FOREIGN KEY( idCategorieMere) REFERENCES Categories(idCategories)
 );
 
 CREATE TABLE Produit(
    idProduit INT,
-   nomProduit VARCHAR(50),
-   prix INT,
-   poids INT,
+   nomProduit VARCHAR(50) NOT NULL,
+   prix INT NOT NULL,
+   poids DECIMAL(15,2) NOT NULL,
    idCategories INT NOT NULL,
    PRIMARY KEY(idProduit),
    FOREIGN KEY(idCategories) REFERENCES Categories(idCategories)
 );
 
 CREATE TABLE LignesCommande(
-   idCommande INT,
+   idCommande VARCHAR(50),
    noLigne INT,
-   quantite INT,
+   quantite INT NOT NULL,
    idProduit INT NOT NULL,
    PRIMARY KEY(idCommande, noLigne),
    FOREIGN KEY(idCommande) REFERENCES Commandes(idCommande),
