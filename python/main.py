@@ -1,5 +1,6 @@
 from getpass import getpass
 from mysql.connector  import connect, Error
+from random import choice
 
 try:
     connection = connect(
@@ -18,5 +19,7 @@ try:
         result = cursor.fetchall()
         for row in result:
             print(row)
+        print()
+        cursor.close()
 except Error as e:
     print(e)
