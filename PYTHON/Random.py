@@ -3,7 +3,7 @@ import random
 maliste = []
 ## mes valeur son compris entre 0 et 100
 for n in range (0,100) :
-    i = random.random()
+    i = random.randint(0,100)
     maliste.append(i)
 
 print(maliste)
