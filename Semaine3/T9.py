@@ -26,18 +26,15 @@ for order in orders:
         # Générer un numéro de ligne aléatoire entre 1 et 3
         line_number = random.randint(1, 3)
         
-        # Vérifier si des produits sont disponibles
-        if produits:
-            # Choisir un produit aléatoire parmi la liste de produits
-            produits = random.choice(produits)[0]  # Sélection du premier élément de la liste
-            # Générer une quantité aléatoire entre 1 et 4
-            quantity = random.randint(1, 4)
+        # Choisir un produit aléatoire parmi la liste de produits
+        product = random.choice(products)
+        
+        # Générer une quantité aléatoire entre 1 et 4
+        quantity = random.randint(1, 4)
 
-            # Insérer la ligne de commande pour la commande actuelle
-            cursor.execute("INSERT INTO LignesCommande (idCommande, noLigne, quantite, idProduit) VALUES (%s, %s, %s, %s)",
-                           (order[0], line_number, quantity, produits))
-        else:
-            print("Pas de produits disponibles. Veuillez insérer des produits dans la table 'Produit'.")
+        # Insérer la ligne de commande pour la commande actuelle
+        cursor.execute("INSERT INTO LignesCommande (idCommande, noLigne, quantite, idProduit) VALUES (%s, %s, %s, %s)",
+                       (order[0], line_number, quantity, product))
 
 conn.commit()
 conn.close()
