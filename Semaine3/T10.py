@@ -9,35 +9,25 @@ conn = mysql.connector.connect(
 
 cursor = conn.cursor()
 
-# Récupérer les catégories depuis les produits
-cursor.execute("SELECT DISTINCT idcategories FROM Produit")
+cursor.execute("SELECT categorieProduit FROM Produits")
 categories = cursor.fetchall()
 
-# Fonction récursive pour traiter les catégories
-def process_categories(cat_string, parent_id=None):
-    if cat_string:
-        categories = cat_string.split('|')
-        for category in categories:
-            parent_id = insert_category(category, parent_id)
-            process_categories(category, parent_id)  # Appel récursif pour traiter les catégories suivantes
-
-  
-    else:
-        # Insérer la nouvelle catégorie
-        cursor.execute("INSERT INTO Categories (nomCategorie, idCategorieMere) VALUES (%s, %s)", (category_name, parent_id))
-        return cursor.lastrowid  # Renvoyer l'ID de la nouvelle catégorie
-
-# Fonction récursive pour traiter les catégories
-def process_categories(cat_string, parent_id=None):
-    if cat_string:
-        categories = cat_string.split('|')
-        for category in categories:
-            parent_id = insert_category(category, parent_id)
-            process_categories(category, parent_id)
-
-# Insérer les catégories pour chaque produit
 for category in categories:
-    process_categories(category[0])
+    category_list = category[0].split(' | ')
+
+    parent_id = None
+
+    for cat in category_list:
+        # Vérifier si la catégorie existe déjà
+        cursor.execute("SELECT idCategories FROM Categories WHERE nomCategorie = %s AND idCategorieMere = %s", (cat, parent_id))
+        cat_id = cursor.fetchone()
+
+        if cat_id:
+            parent_id = cat_id[0]
+        else:
+            # Insérer la catégorie uniquement si elle n'existe pas encore
+            cursor.execute("INSERT INTO Categories (nomCategorie, idCategorieMere) VALUES (%s, %s)", (cat, parent_id))
+            parent_id = cursor.lastrowid  # Récupérer l'ID de la nouvelle catégorie
 
 conn.commit()
 conn.close()
