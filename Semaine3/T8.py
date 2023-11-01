@@ -11,28 +11,21 @@ conn = mysql.connector.connect(
 
 cursor = conn.cursor()
 
+statuses = ['en cours', 'payée', 'livrée', 'annulée']
+
 # Récupérer les ID des clients
 cursor.execute("SELECT idClient FROM Clients")
 clients = cursor.fetchall()
 
-# Liste des statuts possibles
-statuses = ['en cours', 'payée', 'livrée', 'annulée']
-
 for client in clients:
-    # Générer entre 0 et 5 commandes pour chaque client
     num_orders = random.randint(0, 5)
     
     for _ in range(num_orders):
-        # Générer une date aléatoire entre le 1er janvier 2020 et le 1er septembre 2022
-        random_date = datetime(2020, 1, 1) + timedelta(days=random.randint(0, 975))  # 975 days is roughly 2.67 years
-
-        # Choisir un statut aléatoire parmi la liste de statuts
+        random_date = datetime(2020, 1, 1) + timedelta(days=random.randint(0, 975))
         status = random.choice(statuses)
-
-        # Insérer la commande pour le client actuel
-        cursor.execute("INSERT INTO Commandes (idCommande, dateCommande, statut, idClient) VALUES (UUID(), %s, %s, %s)",
+        
+        cursor.execute("INSERT INTO Commandes (dateCommande, statut, idClient) VALUES (%s, %s, %s)",
                        (random_date.strftime('%Y-%m-%d'), status, client[0]))
 
 conn.commit()
 conn.close()
-s
