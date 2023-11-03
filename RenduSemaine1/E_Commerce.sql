@@ -26,7 +26,7 @@ CREATE TABLE Commandes(
 CREATE TABLE Categories(
    idCategories INT,
    nomCategorie VARCHAR(50) NOT NULL,
-   idCategorieMere INT NOT NULL,
+   idCategorieMere INT ,
    PRIMARY KEY(idCategories),
    FOREIGN KEY( idCategorieMere) REFERENCES Categories(idCategories)
 );
