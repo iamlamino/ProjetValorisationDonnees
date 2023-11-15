@@ -13,7 +13,7 @@ cursor = conn.cursor()
 cursor.execute("SELECT idCommande FROM Commandes")
 orders = cursor.fetchall()
 
-cursor.execute("SELECT idProduit FROM Produits")
+cursor.execute("SELECT idProduit FROM Products")
 products = cursor.fetchall()
 
 for order in orders:
