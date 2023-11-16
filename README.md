@@ -1,4 +1,4 @@
-# ProjetVisualisationDonnees
+# ProjetValorisationDonnees
 
 DérouléProjetEcommerceDakar2023-24
 Déroulé du projet ecommerce
