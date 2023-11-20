@@ -1,5 +1,7 @@
-list = ["abc","efg","hij","klm"]
-sentence  = "hello, my name is "
-for i in list:
-    sentence += f"{i} "
-print (sentence)
+import random
+from time import sleep
+while 1 :
+    sleep(2)
+    print(random.randint(0, 100))
+    
+
