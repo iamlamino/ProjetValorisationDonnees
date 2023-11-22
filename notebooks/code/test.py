@@ -1,10 +1,15 @@
+# liste des colonnes de la tables lignes de commandes 
 import pandas as pd
-from ydata_profiling import ProfileReport
-from dataprep.eda import create_report
-from dataprep.datasets import load_dataset, get_dataset_names
-df = pd.read_csv('../data/products.csv')
-df.describe()
-profile = ProfileReport(df, title="Profiling Report")
-"""report = create_report(df)
-report.show_browser()"""
-profile.to_widgets()
+datas = []
+columns = ['idCommande','noligne','idProduit','quantite'] 
+index = [0,1,2,3]
+  
+# creation de la table  
+lignesCommandes = pd.DataFrame(columns) 
+
+# affichage
+print(lignesCommandes)
+
+# transformation en fichier csv 
+lignesCommandes.to_csv('lignesCommandes.csv')
+  
