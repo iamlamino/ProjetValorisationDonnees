@@ -58,20 +58,19 @@ FROM Commandes
 GROUP BY statut;
     
 
-###Clients n'ayant pas encore effectué de commandes   
-    SELECT c.idClient, c.prenom, c.nom
-    FROM Clients c
-    LEFT JOIN Commandes co ON c.idClient = co.idClient
-    WHERE co.idCommande IS NULL;
+### liste des Clients n'ayant pas encore effectué de commandes   
+SELECT c.idClient, c.prenom, c.nom
+FROM Clients c
+LEFT JOIN Commandes co ON c.idClient = co.idClient
+WHERE co.idCommande IS NULL;
     
 
 ### Liste des produits dans une catégorie spécifique triée par prix décroissant :
     
-    SELECT p.nomProduit, p.prix
-    FROM Produit p
-    JOIN Categories c ON p.idCategories = c.idCategories
-    WHERE c.nomCategorie = 'NomCategorieSpecifique'
-    ORDER BY p.prix DESC;
+SELECT p.nomProduit, p.prix
+FROM Produit p
+JOIN Categories c ON p.idCategories = c.idCategories
+WHERE c.nomCategorie = 'Arts, Crafts & Sewing'
+ORDER BY p.prix DESC;
     
 
-Assurez-vous de remplacer les valeurs comme `'idClientSpecifique'`, `'NomCategorieSpecifique'`, `'DateDebut'`, `'DateFin'`, et `'ValeurPoids'` par les valeurs réelles que vous souhaitez analyser.
