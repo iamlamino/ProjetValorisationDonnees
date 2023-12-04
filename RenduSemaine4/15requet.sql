@@ -58,7 +58,6 @@ FROM Commandes
 GROUP BY statut;
     
 
-<<<<<<< HEAD
 ### liste des Clients n'ayant pas encore effectué de commandes   
 SELECT c.idClient, c.prenom, c.nom
 FROM Clients c
@@ -75,7 +74,3 @@ WHERE c.nomCategorie = 'Arts, Crafts & Sewing'
 ORDER BY p.prix DESC;
     
 
-=======
-
-   
->>>>>>> 6ff3d3cc57f81c78363e60b9537074a223a63c67
