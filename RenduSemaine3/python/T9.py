@@ -30,7 +30,7 @@ for order in orders:
         quantity = random.randint(1, 4)
 
         cursor.execute("INSERT INTO LignesCommande (idCommande, noLigne, quantite, idProduit) VALUES (%s, %s, %s, %s)",
-                       (order[0], line_number, quantity, product))
+        (order[0], line_number, quantity, product))
 
 conn.commit()
 conn.close()
