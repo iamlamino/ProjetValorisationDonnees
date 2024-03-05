@@ -1,6 +1,7 @@
 -- Active: 1698010070526@@127.0.0.1@3306@ecommerce
 
 ### Quel sont les clients qui on fait plus de commandes ?
+
    SELECT c.idClient, c.prenom, c.nom, COUNT(co.idCommande) AS NombreCommandes
    FROM Clients c
    JOIN Commandes co ON c.idClient = co.idClient
